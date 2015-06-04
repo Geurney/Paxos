@@ -4,9 +4,29 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Server {
+	/**
+	 * Server ID
+	 */
+	private int ID;
+	
+	/**
+	 * Server Address
+	 */
 	private final ArrayList<String[]> serverAddress;
+	/**
+	 * CLI Thread
+	 */
+	private CLIThread cil;
+	
+	/**
+	 * Communication Thread
+	 */
+	private COMMThread comm;
+	
+	private String STATUS;
 
 	public Server() throws IOException {
 		serverAddress = readFile("Server.txt");
@@ -14,7 +34,6 @@ public class Server {
 
 	public static void main(String[] args) throws IOException {
 		Server server = new Server();
-
 	}
 
 	/**
@@ -39,5 +58,24 @@ public class Server {
 		}
 		bufferedReader.close();
 		return ProcessAddress;
+	}
+	
+	private class CLIThread extends Thread {
+		@Override
+		public void run() {
+			String command;
+			Scanner sc = null;
+			sc = new Scanner(System.in);
+			System.out.println("Site" + ID + ": Please enter a command:");
+			command = sc.nextLine();
+		}
+	}
+	
+	
+	private class COMMThread extends Thread {
+		@Override
+		public void run() {
+			
+		}
 	}
 }
